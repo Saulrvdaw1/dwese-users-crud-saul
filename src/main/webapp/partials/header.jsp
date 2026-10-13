@@ -16,10 +16,16 @@
 <body>
 
 <header>
-    <form action="${pageContext.request.contextPath}/changeLanguage" method="get">
-        <button type="submit" name="lang" value="es">Español</button>
-        <button type="submit" name="lang" value="en">English</button>
-    </form>
+    <!-- Esta directiva debe ir dentro del body para que tenga efecto sobre todos los mensajes del body -->
+           <li>
+               <fmt:setBundle basename="messages"/>
+               <form action="changeLanguage" method="get">
+                   <select name="lang" onchange="this.form.submit()">
+                       <option value="en" ${sessionScope.locale.language == 'en' ? 'selected' : ''}>English</option>
+                       <option value="es" ${sessionScope.locale.language == 'es' ? 'selected' : ''}>Español</option>
+                   </select>
+               </form>
+           </li>
 
     <hr>
 </header>
